@@ -6,6 +6,7 @@
 
 html {
     scroll-behavior: smooth;
+
 }
 
 body {
@@ -172,12 +173,29 @@ nav {
     transition: 0.4s;
     width: fit-content;
     padding-bottom: 10px;
+    position: relative;
+    
 }
+.main-ul li a:before {
+    content: '';
+    background: var(--main-color--);
+    
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+  }
+  .main-ul li a:hover::before {
+    width: 100%;
+    transition: 0.4s;
+  }
 
 .main-ul li a:hover {
+    
     color: var(--main-color--);
     text-decoration: none;
-    border-bottom: var(--main-color--) 4px solid;
+    /* border-bottom: var(--main-color--) 4px solid; */
 }
 
 @media screen and (max-width:481px) {
@@ -252,7 +270,9 @@ button {
 h1 {
     font-size: 60px;
 }
-
+#head .icons{
+    display: flex;
+}
 #head .icons i {
     margin-left: 50px;
     margin-top: 5%;
@@ -275,13 +295,17 @@ h1 {
 #my-image img {
     height: 455px;
     margin-right: 100px;
+    box-shadow: 10px -5px 17px var(--main-color--);
 }
 
 @media screen and (min-width:481px) and (max-width:768px) {
     h1 {
         font-size: 40px;
     }
+    #my-image img {
+    box-shadow: -6px -2px 17px var(--main-color--);
 
+    }
     #head .left-content {
         margin-left: 100px;
     }
@@ -341,6 +365,7 @@ h1 {
     text-align: center;
     font-size: 50px;
     margin-bottom: 80px;
+    color: white;
 }
 
 #about-me .content {
@@ -357,6 +382,7 @@ h1 {
 
 #about-me .left-content img {
     height: 400px;
+    box-shadow: #fff -11px -11px 7px;
 
 }
 
@@ -375,7 +401,7 @@ h1 {
 
 #about-me .right-content p {
     margin-bottom: 60px;
-    color: var(--text-color--);
+    color:#fff;
 }
 
 #about-me .right-content a:first-of-type {
@@ -437,7 +463,6 @@ h2:hover {
 @media screen and (min-width:481px) and (max-width:768px) {
     #about-me .left-content img {
         width: 300px;
-        height: 300px;
     }
 
     #about-me .right-content p {
@@ -482,8 +507,7 @@ h2:hover {
 
 /* start education  */
 #education {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding: 40px 80px;
     background: black;
 
 }
@@ -492,12 +516,12 @@ h2:hover {
     color: white;
 }
 
-#education .container {
+#education .container-e {
     display: flex;
     justify-content: space-between;
 }
 
-#education .container .study {
+#education .container-e .study {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -505,15 +529,15 @@ h2:hover {
 
 }
 
-#education .container .study {
+#education .container-e .study {
     position: relative;
 }
 
-#education .container .study span {
+#education .container-e .study span {
     color: var(--main-color--);
 }
 
-#education .container .study::before {
+#education .container-e .study::before {
     content: "";
     position: absolute;
     width: 80%;
@@ -523,7 +547,7 @@ h2:hover {
     left: 0;
 }
 
-#education .container .study::after {
+#education .container-e .study::after {
     content: "";
     position: absolute;
     width: 20px;
@@ -534,7 +558,7 @@ h2:hover {
     border-radius: 50%;
 }
 
-#education .container #not-active::after {
+#education .container-e #not-active::after {
     content: "";
     position: absolute;
     width: 20px;
@@ -563,51 +587,63 @@ h2:hover {
 }
 
 @media screen and (min-width:481px) and (max-width:768px) {
-    #education .container {
+    #education .container-e{
+        gap: 74px;
         flex-direction: column;
-        width: 40%;
+        width: 75%;
     }
+  
 
-    #education .container .study::before {
+    #education .container-e .study::before {
         transform: rotate(90deg);
         left: 111%;
         width: 30%;
         bottom: 50%;
     }
 
-    #education .container .study::after,
-    #education .container #not-active::after {
-        left: 122%;
-        bottom: 7%;
+    #education .container-e .study::after,
+    #education .container-e #not-active::after {
+       left: 124%;
+       bottom: 46%;
+   }
+    #education .container-e .study {
+        flex-direction: row;
+    }
 
+    #education .container-e .study span{
+        position: absolute;
+    left: 93%;
+    width: 144px;
     }
 }
 
 @media screen and (max-width:481px) {
 
-    #education .container {
+    #education .container-e{
         flex-direction: column;
         width: 100%;
     }
 
-    #education .container .study h5 {
+    #education .container-e .study h5 {
         margin-top: 10px;
     }
 
-    #education .container .study p {
+    #education .container-e .study p {
         margin-bottom: 10px;
     }
 
-    #education .container .study::before {
+    #education .container-e .study::before {
         display: none;
     }
 
-    #education .container .study::after,
-    #education .container #not-active::after {
+    #education .container-e .study::after,
+    #education .container-e#not-active::after {
         display: none;
 
 
     }
+ 
+   
 }
 
 #skills {
@@ -624,32 +660,54 @@ h2:hover {
 }
 
 #skills .container {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 100px;
+ display: grid;
+ grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
+    /* padding-left: 100px; */
 }
 
 #skills span {
     position: relative;
 }
 
-#skills span::before {
-    content: "";
-    position: absolute;
-    width: 60px;
-    height: 7px;
-    top: 9px;
-    right: 118%;
 
-}
 
 #skills #soft-skills,
 #skills #technical-skills {
+    background: #ffffff12;
+    color: #fff;
+    padding: 25px;
+    width: 100%;
+    border-radius: 68px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     font-size: 26px;
     text-align: center;
+    box-shadow: 4px -2px 20px 14px;
+/* transform: rotate(2deg); */
+}
+#skills #soft-skills{
+    box-shadow: inset var(--secondary-color--)  0px 0px 15px 5px;
+}
+#skills #soft-skills:hover{
+    background-color: var(--secondary-color--);
+    transition: 2s;
+    
+}
+
+#skills #technical-skills {
+    box-shadow:inset var(--main-color--)  0px 0px 15px 5px;
+
+}
+#skills #technical-skills:hover {
+    transition: 2s;
+background-color: var(--main-color--);
+}
+#skills #technical-skills:hover h5,
+#skills #soft-skills:hover h5{
+    transition: 2s;
+    color: black;
+
 }
 
 #skills #soft-skills h5 {
@@ -659,9 +717,7 @@ h2:hover {
     margin-bottom: 43px;
 }
 
-#skills #soft-skills span::before {
-    background-color: var(--secondary-color--);
-}
+
 
 #skills #technical-skills h5 {
     color: var(--main-color--);
@@ -670,11 +726,7 @@ h2:hover {
     margin-bottom: 43px;
 }
 
-#skills #technical-skills span::before {
-    background-color: var(--main-color--);
-    right: 110%;
 
-}
 
 @media screen and (min-width:481px) and (max-width:768px) {
 
@@ -682,19 +734,18 @@ h2:hover {
     #skills #technical-skills {
         font-size: 27px;
     }
+#skills span{
+    display: inline-block;
+ 
+    padding: 10px;
+}
 
-    #skills span::before {
-        display: none;
-    }
     #skills .container {
         padding-left: 0;
     }
 }
 
 @media screen and (max-width:481px) {
-    #skills span::before {
-        display: none;
-    }
 
     #skills .container {
         flex-direction: column;
@@ -739,7 +790,7 @@ h2:hover {
     border-radius: 6px;
     position: relative;
     transition: 1s;
-    box-shadow: 0px -3px 0px 0px #ff0247;
+    box-shadow: 0px 0px 13px 0px #ff0247;
 }
 
 #project .card:hover {
@@ -779,6 +830,21 @@ h2:hover {
 #project .card .content .demo a{
     color: var(--main-color--);
     text-decoration: none;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50% , 50%);
+    background: #000000ab;
+    font-weight: 700;
+    font-size: 11px;
+    height: 44px;
+    align-items: center;
+    display: flex;
+    border-radius: 50%;
+    box-shadow: inset 0px 20px 20px red;
+    justify-content: center;
+    color: #ffffff;
+    width: 44px;
 
 }
 #project .card .content:hover .demo {
@@ -844,8 +910,8 @@ h2:hover {
     display: inline-block;
     position: absolute;
     height: 15px;
-   
-    background-color: var(--main-color--);
+    box-shadow: inset red -20px 2px 20px 3px;
+    background-color: #fff;
 }
 #language #length1{
     width: 95%;
@@ -905,10 +971,17 @@ animation: lengtha 2s 1 ;
         grid-template-rows: auto auto;
     }   
 #language .white{
-width: 200px;
+width: 260px;
+}
+#language #lang #arabic ,
+#language #lang #eng {
+    width: 100%;
+}
+#language #lang #arabic p, #language #lang #eng p {
+    font-size: 20px !important;
+}
 }
 
-}
 
 /* End language */
 /* Start reference  */
@@ -967,7 +1040,8 @@ i {
 }
 #reference img:hover{
     transition: 0.4s;
-    transform: scale(1.3);
+    transform: scale(1.1);
+ 
 }
 
 @media screen and (max-width:481px) {
@@ -1080,6 +1154,16 @@ overflow: hidden;
 .facebook:hover {
     transition: 0.4s;
     color: blue;
+}
+@media screen and (max-width:376px) {
+    #language .white{
+        width: 188px !important;
+    }
+    
+#footer #copy{
+    font-size: 5px;
+        top: 34px;
+    }
 }
 
 /* linked-in */
