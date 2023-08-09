@@ -328,12 +328,13 @@ h1 {
         flex-direction: column;
         position: relative;
         text-align: center;
+        justify-content: end;
     }
 
     #my-image img {
         position: absolute;
         top: -40px;
-        left: 8%;
+        left: -4%;
     }
 
     #head p:last-of-type {
